@@ -22,6 +22,12 @@ def get_point2():
 	a = get_point()
 	return geoma.point(a["pos"][0], a["pos"][1])
 
+def get_point2_draw(sc, color, width):
+	p = get_point2()
+	draw_point(sc, p, color, width)
+	pygame.display.update()
+	return p
+
 def get_key():
 	run = True
 	while run:
@@ -61,16 +67,19 @@ def start_game():
 	# l = geoma.line(geoma.point(0, 0), geoma.point(0, 0))
 
 
-	mir = geoma.otr(get_point2(), get_point2())
-	ray = geoma.otr(get_point2(), get_point2())
+	# mir = geoma.otr(get_point2(), get_point2())
+	# ray = geoma.otr(get_point2(), get_point2())
 	# mir = geoma.otr(geoma.point(100, 100), geoma.point(100, 200))
 	# ray = geoma.otr(geoma.point(200, 50), geoma.point(150, 100))
-	draw_point(screen, mir.a, GREEN, 10)
-	draw_point(screen, mir.b, GREEN, 10)
-	draw_point(screen, ray.a, RED, 10)
-	draw_point(screen, ray.b, BLUE, 10)
-	draw_line_otr(screen, ray, RED, 4)
+	# draw_point(screen, mir.a, GREEN, 10)
+	# draw_point(screen, mir.b, GREEN, 10)
+	# draw_point(screen, ray.a, RED, 10)
+	# draw_point(screen, ray.b, BLUE, 10)
+	mir = geoma.otr(get_point2_draw(screen, GREEN, 1), get_point2_draw(screen, GREEN, 1))
 	draw_line_otr(screen, mir, GREEN, 2)
+	pygame.display.update()
+	ray = geoma.otr(get_point2_draw(screen, RED, 2), get_point2_draw(screen, BLUE, 2))
+	draw_line_otr(screen, ray, RED, 4)
 
 	pygame.display.update()
 
