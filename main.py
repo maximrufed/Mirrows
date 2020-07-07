@@ -1,5 +1,6 @@
 import geoma
 import pygame
+import game
 
 WHITE = (255, 255, 255)
 RED = (225, 0, 50)
@@ -59,48 +60,8 @@ def start_game():
 	screen.fill(WHITE)
 	pygame.display.update()
 
-	# pt1 = geoma.point(100, 100)
-	# pygame.draw.circle(screen, RED, pt1.to_arr(), 10)
-	# pt1.rotate(0.5);
-	# pygame.draw.circle(screen, RED, pt1.to_arr(), 10)
-
-	# l = geoma.line(geoma.point(0, 0), geoma.point(0, 0))
-
-
-	# mir = geoma.otr(get_point2(), get_point2())
-	# ray = geoma.otr(get_point2(), get_point2())
-	# mir = geoma.otr(geoma.point(100, 100), geoma.point(100, 200))
-	# ray = geoma.otr(geoma.point(200, 50), geoma.point(150, 100))
-	# draw_point(screen, mir.a, GREEN, 10)
-	# draw_point(screen, mir.b, GREEN, 10)
-	# draw_point(screen, ray.a, RED, 10)
-	# draw_point(screen, ray.b, BLUE, 10)
-	mir = geoma.otr(get_point2_draw(screen, GREEN, 1), get_point2_draw(screen, GREEN, 1))
-	draw_line_otr(screen, mir, GREEN, 2)
-	pygame.display.update()
-	ray = geoma.otr(get_point2_draw(screen, RED, 2), get_point2_draw(screen, BLUE, 2))
-	draw_line_otr(screen, ray, RED, 4)
-
-	pygame.display.update()
-
-	tek = geoma.inter_point(ray, mir)
-	if (tek == -1):	
-		print("No intersection")
-	else:
-		draw_line_otr(screen, tek, BLACK, 2)
-		tek.a.show()
-		tek.b.show()
-		otraz = geoma.rotate_vector_vector(tek.to_vec(), mir.to_vec())
-		draw_line(screen, tek.b, tek.b + otraz, BLACK, 2)
-
-
-	pygame.display.update()
-
-	# while 1:
-		# tek_point = get_point()
-		# pygame.draw.circle(screen, GREEN, tek_point["pos"], 20)
-		# pygame.display.update()
-
+	map = game.map_editor(screen)
+	map.draw()
 	get_point()
 
 	pygame.quit()

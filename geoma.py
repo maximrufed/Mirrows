@@ -1,8 +1,8 @@
 import math
 
 class point:
-	x = 0
-	y = 0
+	x: float
+	y: float
 	def __init__(self, x_init, y_init):
 		self.x = x_init
 		self.y = y_init
