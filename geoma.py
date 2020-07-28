@@ -1,5 +1,7 @@
 import math
 
+eps = 1e-7
+
 class point:
 	x: float
 	y: float
@@ -113,3 +115,29 @@ def inter_point(ray: otr, mir: otr):
 		tek_vec.normalize(tek_vec.len() * d1 / (d1 - d2))
 		ray.b = ray.a + tek_vec;
 		return ray
+
+def dist_pt_otr(p: point, o: otr):
+	ab = o.b - o.a
+	ba = o.a - o.b
+	ap = p - o.a
+	bp = p - o.b
+	if ((scal(ab, ap) >= 0) and (scal(ba, bp) >= 0)):
+		return abs(len_pt_line(p, o))
+	else:
+		return min(ap.len(), bp.len())
+	
+def pt_to_line(a: point, o: otr):
+    return (vect(o.a - a, o.b - a) == 0)
+
+
+def otr_inter(a: otr, b: otr):
+    if (pt_to_line(a.a, b) and pt_to_line(a.b, b)):
+        if (((max(a.a.x, a.b.x) < min(b.a.x, b.b.x)) or ((min(a.a.x, a.b.x) > max(b.a.x, b.b.x))))
+        or ((max(a.a.y, a.b.y) < min(b.a.y, b.b.y)) or ((min(a.a.y, a.b.y) > max(b.a.y, b.b.y))))):
+            return 0
+        else:
+            return 1
+    t = a.b - a.a
+    t2 = b.b - b.a
+    return (sign(vect(t, b.a -  a.b)) != sign(vect(t, b.b - a.b))) and (sign(vect(t2, a.a - b.a)) != sign(vect(t2, a.b - b.a)))
+
