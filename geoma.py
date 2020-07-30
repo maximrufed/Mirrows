@@ -125,7 +125,20 @@ def dist_pt_otr(p: point, o: otr):
 		return abs(len_pt_line(p, o))
 	else:
 		return min(ap.len(), bp.len())
-	
+
+def inside_pt_otr(p: point, o: otr):
+	ab = o.b - o.a
+	ba = o.a - o.b
+	ap = p - o.a
+	bp = p - o.b
+	if ((scal(ab, ap) >= 0) and (scal(ba, bp) >= 0)):
+		return 0
+	else:
+		if (ap.len() < bp.len()):
+			return 1
+		else:
+			return 2
+
 def pt_to_line(a: point, o: otr):
     return (vect(o.a - a, o.b - a) == 0)
 
@@ -140,4 +153,12 @@ def otr_inter(a: otr, b: otr):
     t = a.b - a.a
     t2 = b.b - b.a
     return (sign(vect(t, b.a -  a.b)) != sign(vect(t, b.b - a.b))) and (sign(vect(t2, a.a - b.a)) != sign(vect(t2, a.b - b.a)))
+
+def line_inter(l1: line, l2: line):
+	return point((l1.b * l2.c - l2.b * l1.c) / (l1.a * l2.b - l2.a * l1.b), (l1.a * l2.c - l2.a * l1.c) / (l2.a * l1.b - l1.a * l2.b))
+
+def perp_line_pt(l: line, p: point):
+	a = line(point(0, 0), point(0, 0))
+	a.set(-l.b, l.a, -(p.x * -l.b + p.y * l.a))
+	return a
 

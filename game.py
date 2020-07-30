@@ -385,12 +385,6 @@ class map_editor():
 						change = 1
 
 
-
-class player():
-	pos: geoma.point
-	def __init__(self):
-		pos.set(0, 0)
-
 class map():
 	# walls = [geoma.otr(geoma.point(0, 0), geoma.point(0, 100)), geoma.otr(geoma.point(79, 35), geoma.point(3245.45432, 100.77))]
 	# start = [geoma.otr(geoma.point(0, 0), geoma.point(20, 20))]
@@ -453,31 +447,6 @@ class map():
 
 	def add_finish(self, o):
 		self.finish.append(o)
-
-class game():
-	UNINIT = 0
-	TURN = 1
-	WIN = 2
-	LOSE = 3
-
-	tek_map: map
-	players = []
-	tek_player = 0
-	state = UNINIT
-	
-	def __init__(self):
-		self.state = self.UNINIT
-
-	def load_map(self):
-		pass
-
-	def turn(self):
-		pass
-
-	def start(self):
-		while (self.state != self.WIN or self.state != self.LOSE):
-			turn()
-			break
 
 if __name__ == "__main__":
 	# g = game()
